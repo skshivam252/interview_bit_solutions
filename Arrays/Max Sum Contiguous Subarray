@@ -1,0 +1,12 @@
+int Solution::maxSubArray(const vector<int> &A) {
+    int max_sum=A[0];
+    int max_now=A[0];
+    for(int i=1;i<A.size();i++){
+        max_now=max(max_now+A[i],A[i]);
+        max_sum=max(max_now,max_sum);
+    }
+    
+    return max_sum;
+    
+}
+

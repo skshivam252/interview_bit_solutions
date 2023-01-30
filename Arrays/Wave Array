@@ -1,0 +1,13 @@
+vector<int> Solution::wave(vector<int> &A) {
+    sort(A.begin(),A.end());
+    vector <int> res;
+    for(int m=0;m<A.size();m+=2){
+        if(m+1<A.size()){
+            res.push_back(A[m+1]);
+        }
+        res.push_back(A[m]);
+    }
+    
+    return res;
+}
+

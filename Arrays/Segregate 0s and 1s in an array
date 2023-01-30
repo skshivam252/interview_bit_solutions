@@ -1,0 +1,16 @@
+vector<int> Solution::solve(vector<int> &A) {
+    int i=0,j=A.size()-1;
+    while(i<j){
+        if(A[i]==0){
+            i++;
+        }
+        if(A[i]==1){
+            swap(A[i],A[j]);
+            j--;
+        }
+    }
+    
+    return A;
+}
+
+

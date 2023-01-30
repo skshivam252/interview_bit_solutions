@@ -1,0 +1,22 @@
+vector<vector<int> > Solution::solve(int A) {
+    vector<vector<int>> resf;
+    if(A==0){
+        return resf;
+    }
+    
+    resf.push_back(vector<int> {1});
+    for(int i=1;i<A;i++){
+        vector<int> temp=resf.back();
+        vector<int> res;
+        res.push_back(1);
+        for(int i=0;i<temp.size()-1;i++){
+            res.push_back(temp[i]+temp[i+1]);
+        }
+        res.push_back(1);
+        resf.push_back(res);
+    }
+    return resf;
+
+
+}
+

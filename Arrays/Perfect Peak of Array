@@ -1,0 +1,33 @@
+int count(vector<int> &A, int num){
+    int count=0;
+    for(int i=0;i<A.size();i++){
+        if(A[i]==num){
+            count++;
+        }
+        if(count==2){
+            return count;
+        }
+    }
+    return count;
+}
+
+
+int Solution::perfectPeak(vector<int> &A) {
+    int n=A.size()-1;
+    int leftmax[A.size()];
+    int rightsmall[A.size()];
+    leftmax[0]=A[0];
+    rightsmall[n]=A[n];
+    for(int i=1;i<A.size();i++){
+        leftmax[i]=max(leftmax[i-1],A[i]);
+        rightsmall[n-i]=min(rightsmall[n-i+1],A[n-i]);
+    }
+    for(int i=1;i<n;i++){
+        if(A[i]>leftmax[i-1] && A[i]<rightsmall[i+1]){
+            return 1;
+        }
+    }
+    
+    return 0;
+}
+

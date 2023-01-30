@@ -1,0 +1,11 @@
+int Solution::solve(vector<int> &A) {
+    int m=INT_MAX,n=INT_MIN;
+    for(int i=0;i<A.size();i++){
+        m=min(m,A[i]);
+        n=max(n,A[i]);
+    }
+    
+    return m+n;
+}
+
+

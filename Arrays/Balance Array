@@ -1,0 +1,33 @@
+int Solution::solve(vector<int> &A) {
+    vector <pair<int,int>>left;
+    vector<pair<int,int>> right(A.size());
+    for(int i=0;i<A.size();i++){
+        if(i==0){
+            left.push_back(make_pair(0,0));
+            right[A.size()-1]=make_pair(0,0);
+        }
+        else{
+            if(i%2==1){
+                left.push_back(make_pair(left.back().first+A[i-1],left.back().second));
+            }
+            else{
+                left.push_back(make_pair(left.back().first,left.back().second+A[i-1]));
+            }
+            if((A.size()-1-i)%2==0){
+                right[A.size()-1-i]=make_pair(right[A.size()-i].first,right[A.size()-i].second+A[A.size()-i]);
+            }
+            else{
+                right[A.size()-1-i]=make_pair(right[A.size()-i].first+A[A.size()-i],right[A.size()-i].second);
+            }
+        }
+    }
+    int res=0;
+    for(int i=0;i<A.size();i++){
+        if(left[i].first+right[i].second==left[i].second+right[i].first){
+            res++;
+        }
+    }
+    
+    return res;
+}
+

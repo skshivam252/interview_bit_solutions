@@ -1,0 +1,46 @@
+int findpos(vector<int>&A,int B,int i){
+    int end=i+B-1;
+    if(end>=A.size()){
+        end = A.size()-1;
+    }
+    for(int m=end;m >(i-B) && m>=0;m--){
+        if(A[m]==1){
+            return m;
+        }
+    }
+    
+    return -1;
+}
+
+
+void lightup(vector<int> & lighted, int i, int B){
+    int end=i+B-1;
+    if(end>=lighted.size()){
+        end = lighted.size()-1;
+    }
+    for(int m=end;m >(i-B) && m>=0;m--){
+        if(lighted[m]==1){
+            return ;
+        }
+        lighted[m]=1;
+    }
+}
+
+int Solution::solve(vector<int> &A, int B) {
+    int lcount=0;
+    vector <int> lighted(A.size(),0);
+    for(int i=0;i<A.size();i++){
+        if(lighted[i]==0){
+            int x=findpos(A,B,i);
+            if(x==-1){
+                return -1;
+            }
+            lightup(lighted,x,B);
+            lcount++;
+        }
+    }
+    
+    
+    return lcount;
+}
+

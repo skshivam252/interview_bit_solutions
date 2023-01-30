@@ -1,0 +1,32 @@
+bool check(pair<int,char> a,pair<int,char> b){
+    if(a.first!=b.first){
+        return a.first<b.first;
+    }
+    return a.second < b.second;
+}
+
+
+
+bool Solution::hotel(vector<int> &arrive, vector<int> &depart, int K) {
+    vector<pair<int,char>> temp;
+    for(int i=0;i<arrive.size();i++){
+        temp.push_back(make_pair(arrive[i],'a'));
+        temp.push_back(make_pair(depart[i],'d'));
+    }
+    sort(temp.begin(),temp.end(),check);
+    int maxr=0;
+    int curr=0;
+    for(int i=0;i<temp.size();i++){
+        //cout << temp[i].first << "  " <<temp[i].second << "\n";
+        if(temp[i].second=='a'){
+            curr++;
+            maxr=max(maxr,curr);
+        }
+        else{
+            curr--;
+        }
+    }
+    
+    return K>=maxr;
+}
+

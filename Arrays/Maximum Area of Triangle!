@@ -1,0 +1,94 @@
+int findMaxDistanceBwn(char a, char b, int index, vector<string>&A){
+    int n = A.size();
+    int top = 0, bottom = n-1, base = 0; 
+    while(top<n && A[top][index]!=a){
+        top++;
+    }
+    while(bottom>=0 && A[bottom][index]!=b){
+        bottom--;
+    }
+    
+    base = max(base, bottom - top + 1); 
+    top = 0; 
+    bottom = n-1; 
+    while(top<n && A[top][index]!=b){
+        top++;
+    }
+    while(bottom>=0 && A[bottom][index]!=a){
+        bottom--;
+    }
+    
+    return max(base, bottom - top + 1);
+}
+
+
+long area(int base, int height){
+    long double b = base; 
+    long double h = height; 
+    return ceil(0.5*b*h);
+}
+
+
+long helper(vector<string>&A){
+    int n = A.size();
+    if(n<2) return 0;
+    int m = A[0].size();
+    
+    int lastColWithRGB[] = {m,m,m};
+    bool foundAllColors = false; 
+    
+    for(int j=m-1; j>=0; j--){
+        for(int i=0; i<n; i++){
+            if(A[i][j]=='r' && lastColWithRGB[0]==m){
+                lastColWithRGB[0] = j;
+            }
+            else if(A[i][j]=='g' && lastColWithRGB[1]==m){
+                lastColWithRGB[1] = j;
+            }
+            else if(A[i][j]=='b' && lastColWithRGB[2]==m){
+                lastColWithRGB[2] = j;
+            }
+            if(lastColWithRGB[0]!=m && lastColWithRGB[1]!=m && lastColWithRGB[2]!=m){
+                foundAllColors = true;
+                break;
+            }
+        }
+        if(foundAllColors) break;
+    }
+    
+    if(foundAllColors == false) return 0; 
+    
+    long res = 0;
+    for(int i=0; i<m; i++){
+        int base = findMaxDistanceBwn('r', 'g', i, A); 
+        int height = lastColWithRGB[2] - i+1;
+        if(height>0) {
+            res = max(res, area(base, height));
+        }
+        
+        base = findMaxDistanceBwn('r', 'b', i, A); 
+        height = lastColWithRGB[1] - i+1;
+        if(height>0) {
+            res = max(res, area(base, height));
+        }
+        
+        base = findMaxDistanceBwn('g', 'b', i, A); 
+        height = lastColWithRGB[0] - i+1;
+        if(height>0) {
+            res = max(res, area(base, height));
+        }
+        
+    }
+    
+    return res;
+}
+
+int Solution::solve(vector<string> &A) {
+    long area = helper(A); 
+    for(string &s: A){
+        reverse(s.begin(), s.end());
+    }
+    
+    area = max(area, helper(A));
+    return area;
+}
