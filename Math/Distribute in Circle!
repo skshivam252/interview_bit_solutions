@@ -1,0 +1,8 @@
+int Solution::solve(int A, int B, int C) {
+    int res=(C+A%B-1)%B;
+    if(res==0){
+        return B;
+    }
+    return res;
+}
+

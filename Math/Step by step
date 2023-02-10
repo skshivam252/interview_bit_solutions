@@ -1,0 +1,16 @@
+int Solution::solve(int B) {
+    B=abs(B);
+    long long int A=(long long int)B;
+    if(A<2){
+        return (int)A;
+    }
+    long long int s=(sqrt(1+8*A)-1)/2;
+    long long int pos=(s*(s+1))/2;
+    while(pos<A || (pos-A)%2!=0){
+        s++;
+        pos=(s*(s+1))/2;
+    }
+    
+    return (int)s;
+}
+

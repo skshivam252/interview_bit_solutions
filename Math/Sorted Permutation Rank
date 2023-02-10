@@ -1,0 +1,30 @@
+int M=1000003;
+
+
+int Solution::findRank(string A) {
+    int fact=1;
+    vector<int> vec;
+    for(int i=0;i<A.length();i++){
+        int re=0;
+        for(int j=i+1;j<A.length();j++){
+            if(A[j]<A[i]){
+                re++;
+            }
+        }
+        vec.push_back(re);
+    }
+    int res=0;
+    for(int i=vec.size()-2;i>=0;i--){
+        long long int temp=1;
+        temp*=fact;
+        temp*=vec[i];
+        temp%=M;
+        res=(res+(int)temp)%M;
+        fact*=(vec.size()-i);
+        fact%=M;
+    }
+    
+    return (res+1)%M;
+    
+}
+

@@ -1,0 +1,11 @@
+int Solution::solve(int A, int B) {
+    int res=0;
+    int x1=8-A,y1=8-B;
+    int x2=A-1,y2=B-1;
+    res+=min(x2,y2);
+    res+=min(x1,y1);
+    res+=min(x1,y2);
+    res+=min(x2,y1);
+    return res;
+}
+

@@ -1,0 +1,28 @@
+int Solution::divisibleBy60(vector<int> &A) {
+    int sum=0;
+    int even=0;
+    int ze=0;
+    for(int i=0;i<A.size();i++){
+        sum+=A[i];
+        if(A[i]==0){
+            ze++;
+        }
+        else if(A[i]%2==0){
+            even++;
+        }
+    }
+    if(ze==A.size()){
+        return 1;
+    }
+    if(sum%3>0){
+        return 0;
+    }
+    if(ze==0){
+        return 0;
+    }
+    if((even+ze)<=1){
+        return 0;
+    }
+    return 1;
+}
+

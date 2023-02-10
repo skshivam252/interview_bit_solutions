@@ -1,0 +1,22 @@
+string Solution::convertToTitle(int A) {
+    if(A==0){
+        return "";
+    }
+    if(A<=26){
+        char c='A'+A-1;
+        string res="";
+        res+=c;
+        return res;
+    }
+    int t=A%26-1;
+    if(t==-1){
+        t=25;
+    }
+    char m='A'+t;
+    A=A/26;
+    if(t==25){
+        A--;
+    }
+    return convertToTitle(A)+m;
+    
+}

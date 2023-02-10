@@ -1,0 +1,15 @@
+int Solution::highestScore(vector<vector<string> > &A) {
+    unordered_map<string,pair<int,int>> map;
+    for(auto &e:A){
+        map[e[0]].first+=stoi(e[1]);
+        map[e[0]].second++;
+    }
+    int res=INT_MIN;
+    for(auto &e:map){
+        res=max(res,e.second.first/e.second.second);
+    }
+    
+    return res;
+}
+
+

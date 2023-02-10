@@ -1,0 +1,28 @@
+vector < int > Solution::powerfulDivisors(vector < int > & A) {
+    int maxn = 1;
+    for (int i = 0; i < A.size(); i++) {
+        maxn = max(maxn, A[i]);
+    }
+    vector < int > div(maxn + 1);
+    for (int i = 1; i <= maxn; i++) {
+        for (int j = i; j <= maxn; j += i) {
+            div[j]++;
+        }
+    }
+    vector < int > count(maxn + 1);
+    count[1] = 1;
+    for (int i = 2; i <= maxn; i++) {
+        int x = div[i];
+        if (x == (-x & x))
+            count[i] = 1;
+    }
+    for (int i = 2; i <= maxn; i++) {
+        count[i] += count[i - 1];
+    }
+    vector < int > ans(A.size());
+    for (int i = 0; i < ans.size(); i++) {
+        ans[i] = count[A[i]];
+    }
+    return ans;
+}
+
